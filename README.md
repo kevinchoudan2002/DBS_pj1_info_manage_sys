@@ -1,1 +1,1 @@
-# DBS_pj1_info_manage_sys
+# DBS_Project 1 on Information Management System
