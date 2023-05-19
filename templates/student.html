@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student</title>
+</head>
+<body>
+    <h1>学生信息管理系统</h1>
+    {% for item in student_list %}
+        <p>学生姓名：{{ item.name }} 学号： {{ item.student_id }} 年龄： {{ item.age }} 性别： {{ item.sex }} 专业： {{ item.major }} </p>
+    {% endfor %}
+    <h3>学生信息更新</h3>
+    <form method="post" action="{% url 'update_student' %}">
+        {% csrf_token %}
+        <p>学号<input type="text" name="student_id">
+        需要更改的属性<input type="text" name="attribute">
+        更新值<input type="text" name="new_value">
+        <button type="submit">Update</button></p>
+    </form>
+
+    <h3>创建新学生</h3>
+    <form method="post" action="{% url 'create_student' %}">
+        {% csrf_token %}
+        <p>学号<input type="text" name="student_id">
+        姓名<input type="text" name="name">
+        性别（请输入数字，1=男，2=女）<input type='text' name='sex'>
+        专业<input type="text" name="major">
+        年龄<input type="text" name="age">
+
+        <button type="submit">Create</button></p>
+    </form>
+    
+    <h3>删除学生信息</h3>
+    <form method="post" action="{% url 'delete_student' %}">
+        {% csrf_token %}
+        <p>学号<input type="text" name="student_id">
+        <button type="submit">Delete</button></p>
+    </form>
+
+    <h3>查询学生信息</h3>
+    <form method="post" action="{% url 'query_student' %}">
+        {% csrf_token %}
+        <p>学号<input type="text" name="student_id">
+        <button type="submit">Query</button></p>
+    </form>
+    <h2>Search results for "{{ student_id }}"</h2>
+    {% if student %}
+    <ul>
+      {% for result in student %}
+        <li>{{ result.name }}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+       <p>No results found.</p>
+    {% endif %}
+ 
+
+</body>
+</html>
